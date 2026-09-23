@@ -94,6 +94,22 @@ code{font-family:var(--mono);font-size:.9em;background:var(--blue-soft);color:va
 .btn-fill{background:var(--invert-bg);color:var(--invert-fg);border-color:var(--invert-bg)}
 .btn-fill:hover{background:var(--blue);border-color:var(--blue);color:var(--blue-ink)}
 
+/* network switcher */
+.net{position:relative;display:flex;align-items:stretch;border-right:1px solid var(--rule-soft)}
+.net-btn{display:flex;align-items:center;gap:.6rem;padding:0 1.1rem;background:none;border:0;color:var(--blue-text);font-family:var(--mono);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;cursor:pointer;transition:background .15s,color .15s}
+.net-btn:hover,.net.open .net-btn{background:var(--invert-bg);color:var(--invert-fg)}
+.net-btn svg{width:14px;height:14px;transition:transform .15s}
+.net.open .net-btn svg{transform:rotate(180deg)}
+.net-dot{width:8px;height:8px;background:var(--mint);outline:1px solid var(--rule)}
+.net-menu{display:none;position:absolute;top:100%;left:-1px;min-width:220px;background:var(--paper);border:2px solid var(--rule);z-index:60}
+.net.open .net-menu{display:block}
+.net-menu a{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:.2rem .7rem;padding:.75rem 1rem;font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--rule-soft);transition:background .15s,color .15s}
+.net-menu a:last-child{border-bottom:0}
+.net-menu a::before{content:"";width:8px;height:8px;background:var(--blue)}
+.net-menu a[aria-selected="true"]::before{background:var(--mint)}
+.net-menu a small{grid-column:2;font-size:.66rem;letter-spacing:.04em;text-transform:none;opacity:.7}
+.net-menu a:hover{background:var(--invert-bg);color:var(--invert-fg)}
+
 /* header */
 .top{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--paper);border-bottom:2px solid var(--rule)}
 .top .row{display:flex;align-items:stretch;min-height:64px}
@@ -124,6 +140,8 @@ code{font-family:var(--mono);font-size:.9em;background:var(--blue-soft);color:va
   .theme-btn{margin-left:auto}
   .theme-btn .t-light,.theme-btn .t-dark{display:none!important}
   .tag{display:none}
+  .net-btn{padding:0 .8rem}
+  .net-btn svg{display:none}
 }
 
 /* hero */
@@ -331,7 +349,13 @@ code{font-family:var(--mono);font-size:.9em;background:var(--blue-soft);color:va
 <header class="top">
   <div class="pad row">
     <a class="logo" href="../../" aria-label="Kurier home"><svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 737.5 145" role="img" aria-label="Kurier"><rect x="0" y="0" width="20" height="20" fill="#5C72FF"/><rect x="25" y="0" width="20" height="20" fill="currentColor"/><rect x="100" y="0" width="20" height="20" fill="currentColor"/><rect x="0" y="25" width="20" height="20" fill="#5C72FF"/><rect x="25" y="25" width="20" height="20" fill="currentColor"/><rect x="75" y="25" width="20" height="20" fill="currentColor"/><rect x="25" y="50" width="20" height="20" fill="currentColor"/><rect x="50" y="50" width="20" height="20" fill="currentColor"/><rect x="75" y="50" width="20" height="20" fill="#5C72FF"/><rect x="100" y="50" width="20" height="20" fill="#5C72FF"/><rect x="25" y="75" width="20" height="20" fill="currentColor"/><rect x="50" y="75" width="20" height="20" fill="currentColor"/><rect x="75" y="75" width="20" height="20" fill="#5C72FF"/><rect x="125" y="75" width="20" height="20" fill="#5C72FF"/><rect x="0" y="100" width="20" height="20" fill="#5C72FF"/><rect x="25" y="100" width="20" height="20" fill="currentColor"/><rect x="50" y="100" width="20" height="20" fill="#5C72FF"/><rect x="75" y="100" width="20" height="20" fill="currentColor"/><rect x="25" y="125" width="20" height="20" fill="currentColor"/><rect x="75" y="125" width="20" height="20" fill="#5C72FF"/><rect x="100" y="125" width="20" height="20" fill="#B5FFA5"/><rect x="125" y="125" width="20" height="20" fill="#5C72FF"/><g fill="currentColor" transform="translate(172.55,145.00) scale(0.21137,-0.21137)"><path transform="translate(0,0)" d="M40 0V688H224V411L324 688H514L391 385L519 0H318L267 220L224 164V0Z"/><path transform="translate(494,0)" d="M254 -12Q187 -12 137.5 10.5Q88 33 62.0 86.5Q36 140 36 231V688H219V221Q219 186 224.5 165.0Q230 144 252 144Q276 144 282.0 165.0Q288 186 288 221V688H472V231Q472 140 445.5 86.5Q419 33 371.0 10.5Q323 -12 254 -12Z"/><path transform="translate(981,0)" d="M40 0V688H292Q369 688 412.0 660.0Q455 632 472.5 584.0Q490 536 490 477Q490 423 479.0 375.5Q468 328 434 293L510 0H321L273 231H224V0ZM224 376H267Q291 376 299.0 401.5Q307 427 307 459Q307 481 303.5 498.5Q300 516 291.5 527.0Q283 538 267 538H224Z"/><path transform="translate(1474,0)" d="M40 0V688H224V0Z"/><path transform="translate(1718,0)" d="M40 0V688H438V530H224V428H402V270H224V158H443V0Z"/><path transform="translate(2163,0)" d="M40 0V688H292Q369 688 412.0 660.0Q455 632 472.5 584.0Q490 536 490 477Q490 423 479.0 375.5Q468 328 434 293L510 0H321L273 231H224V0ZM224 376H267Q291 376 299.0 401.5Q307 427 307 459Q307 481 303.5 498.5Q300 516 291.5 527.0Q283 538 267 538H224Z"/></g></svg></a>
-    <span class="tag">Mainnet</span>
+    <div class="net" id="net">
+      <button class="net-btn" id="net-btn" type="button" aria-haspopup="listbox" aria-expanded="false"><span class="net-dot"></span>Mainnet <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+      <div class="net-menu" role="listbox" aria-label="Network">
+        <a role="option" aria-selected="true" href="../../">Mainnet<small>kurier.xyz</small></a>
+        <a role="option" aria-selected="false" href="../../testnet/">Testnet<small>testnet.kurier.xyz</small></a>
+      </div>
+    </div>
     <nav id="nav" aria-label="Primary">
       <a href="../../">Overview</a>
       <a href="https://kurier.xyz/docs">API Documentation</a>
@@ -494,7 +518,7 @@ setInterval(() => {
         <a href="https://kurier.xyz/docs">Getting Started</a>
         <a href="https://kurier.xyz/docs/FAQ">FAQ</a>
         <a href="https://kurier.xyz/docs/supported_proof_types">Supported Proof Types</a>
-        <a href="https://testnet.kurier.xyz">Testnet Environment</a>
+        <a href="../../testnet/">Testnet Environment</a>
         <a href="https://kurier.xyz/docs/supported_networks">Supported Networks</a>
       </nav>
     </div>
@@ -521,6 +545,10 @@ setInterval(() => {
   var saved=null;try{saved=localStorage.getItem('kurier-theme');}catch(e){}
   if(saved==='light'||saved==='dark')apply(saved);else tbtn.setAttribute('data-mode',current());
   tbtn.addEventListener('click',function(){var t=current()==='dark'?'light':'dark';apply(t);try{localStorage.setItem('kurier-theme',t);}catch(e){}});
+  var net=document.getElementById('net'),netBtn=document.getElementById('net-btn');
+  if(net){netBtn.addEventListener('click',function(e){e.stopPropagation();var o=net.classList.toggle('open');netBtn.setAttribute('aria-expanded',o?'true':'false');});
+    document.addEventListener('click',function(){net.classList.remove('open');netBtn.setAttribute('aria-expanded','false');});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){net.classList.remove('open');netBtn.setAttribute('aria-expanded','false');}});}
   var btn=document.getElementById('menu-btn'),nav=document.getElementById('nav');
   btn.addEventListener('click',function(){var o=nav.classList.toggle('open');btn.setAttribute('aria-expanded',o?'true':'false');});
   var form=document.getElementById('signup'),status=document.getElementById('f-status');
